@@ -9,6 +9,7 @@ function App() {
     email: "",
     password: "",
     confirmPassword: "",
+    policy: false,
   });
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -109,10 +110,24 @@ function App() {
             placeholder="Confirm Password"
           />
           <br />
-
+          <input type="checkbox" name="policy" required value={values.policy} />
+          <span style={{ fontSize: "1.2rem" }}>
+            I accept the{" "}
+            <a href="/" style={{ color: "white" }}>
+              Privacy Policy
+            </a>
+            .
+          </span>
+          <br />
           <StyledButton type="submit" value="Register">
             Register
           </StyledButton>
+          <p style={{ fontSize: "1rem" }}>
+            Already have an account?{" "}
+            <a href="/" style={{ color: "white" }}>
+              Login.
+            </a>
+          </p>
         </form>
       </header>
     </div>

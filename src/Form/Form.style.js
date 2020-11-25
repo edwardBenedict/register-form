@@ -10,11 +10,14 @@ export const StyledInput = styled.input`
   width: 15rem;
   border-radius: 3px;
   margin-bottom: 0.5rem;
+  font-size: 1rem;
 `;
 
 export const StyledButton = styled.button`
   width: 10rem;
   background-color: rgb(186, 85, 211);
   height: 2rem;
-  border-radius: 3px;
+  border-radius: 5px;
+  color: white;
+  font-size: 1.2rem;
 `;
