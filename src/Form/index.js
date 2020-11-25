@@ -24,35 +24,36 @@ function App() {
     const errors = {};
 
     if (!values.firstName) {
-      // console.log("Fill the First Name");
       return (errors.firstName = "Fill the First Name");
     }
     if (!values.lastName) {
-      // console.log("Fill the First Name");
       return (errors.lastName = "Fill the Last Name");
     }
 
     if (!values.email) {
-      // console.log("Fill the Email Address");
       return (errors.email = "Fill the Email Address");
     } else if (
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
     ) {
-      // console.log("Invalid Email");
       return (errors.email = "Invalid Email Address");
     }
     if (!values.password) {
-      // console.log("Enter Password!");
       return (errors.password = "Enter Your Password");
     } else if (values.password.length < 8) {
-      // console.log("Password must be min 8 characters!");
       return (errors.password = "Password must be min 8 characters!");
+    } else if (values.password.search(/\d/) === -1) {
+      return (errors.password = "Password must contain number!");
+    } else if (values.password.search(/[a-zA-Z]/) === -1) {
+      return (errors.password = "Password must contain letter!");
+    } else if (values.password.search(/[^a-zA-Z0-9!@#$%^&*()_+]/) === -1) {
+      return (errors.password = "Password must contain special character!");
     } else if (!values.confirmPassword) {
-      // console.log("Confirm Password!");
       return (errors.password = "Confirm Password");
     } else if (!(values.password === values.confirmPassword)) {
-      // console.log("Didn't match password!");
       return (errors.password = "Didn't Match Password");
+    }
+    if (!values.policy) {
+      return (errors.policy = "You should accept Privacy Policy!");
     }
     return "Resgistered Succesfully!";
   };
@@ -102,7 +103,13 @@ function App() {
           placeholder="Confirm Password"
         />
         <br />
-        <input type="checkbox" name="policy" required value={values.policy} />
+        <input
+          type="checkbox"
+          name="policy"
+          // required
+          value={values.policy}
+          onChange={(e) => setValues({ ...values, policy: e.target.checked })}
+        />
         <span style={{ fontSize: "1.2rem", paddingLeft: "0.5rem" }}>
           I accept the{" "}
           <a href="/" style={{ color: "white" }}>
