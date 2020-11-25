@@ -1,6 +1,6 @@
 import "../App.css";
 import { useState } from "react";
-import { StyledInput, StyledImg, StyledButton } from "./Form.style";
+import { StyledInput, StyledButton } from "./Form.style";
 
 function App() {
   const [values, setValues] = useState({
@@ -58,78 +58,69 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <StyledImg
-          src="https://secure.meetupstatic.com/photos/event/3/1/b/9/600_488352729.jpeg"
-          alt=""
+    <div>
+      <form onSubmit={handleSubmit}>
+        <StyledInput
+          type="text"
+          name="fisrtName"
+          onChange={(e) => setValues({ ...values, firstName: e.target.value })}
+          value={values.firstName}
+          placeholder="First Name"
         />
-        <form onSubmit={handleSubmit}>
-          <h1>Welcome to Clarusway</h1>
-          <StyledInput
-            type="text"
-            name="fisrtName"
-            onChange={(e) =>
-              setValues({ ...values, firstName: e.target.value })
-            }
-            value={values.firstName}
-            placeholder="First Name"
-          />
-          <br />
-          <StyledInput
-            type="text"
-            name="lastName"
-            onChange={(e) => setValues({ ...values, lastName: e.target.value })}
-            value={values.lastName}
-            placeholder="Last Name"
-          />
-          <br />
-          <StyledInput
-            type="email"
-            name="email"
-            onChange={(e) => setValues({ ...values, email: e.target.value })}
-            value={values.email}
-            placeholder="Email Address"
-          />
-          <br />
-          <StyledInput
-            type="password"
-            name="password"
-            onChange={(e) => setValues({ ...values, password: e.target.value })}
-            value={values.password}
-            placeholder="Password"
-          />
-          <br />
-          <StyledInput
-            type="password"
-            name="confirmPassword"
-            onChange={(e) =>
-              setValues({ ...values, confirmPassword: e.target.value })
-            }
-            value={values.confirmPassword}
-            placeholder="Confirm Password"
-          />
-          <br />
-          <input type="checkbox" name="policy" required value={values.policy} />
-          <span style={{ fontSize: "1.2rem" }}>
-            I accept the{" "}
-            <a href="/" style={{ color: "white" }}>
-              Privacy Policy
-            </a>
-            .
-          </span>
-          <br />
-          <StyledButton type="submit" value="Register">
-            Register
-          </StyledButton>
-          <p style={{ fontSize: "1rem" }}>
-            Already have an account?{" "}
-            <a href="/" style={{ color: "white" }}>
-              Login.
-            </a>
-          </p>
-        </form>
-      </header>
+        <br />
+        <StyledInput
+          type="text"
+          name="lastName"
+          onChange={(e) => setValues({ ...values, lastName: e.target.value })}
+          value={values.lastName}
+          placeholder="Last Name"
+        />
+        <br />
+        <StyledInput
+          type="email"
+          name="email"
+          onChange={(e) => setValues({ ...values, email: e.target.value })}
+          value={values.email}
+          placeholder="Email Address"
+        />
+        <br />
+        <StyledInput
+          type="password"
+          name="password"
+          onChange={(e) => setValues({ ...values, password: e.target.value })}
+          value={values.password}
+          placeholder="Password"
+        />
+        <br />
+        <StyledInput
+          type="password"
+          name="confirmPassword"
+          onChange={(e) =>
+            setValues({ ...values, confirmPassword: e.target.value })
+          }
+          value={values.confirmPassword}
+          placeholder="Confirm Password"
+        />
+        <br />
+        <input type="checkbox" name="policy" required value={values.policy} />
+        <span style={{ fontSize: "1.2rem", paddingLeft: "0.5rem" }}>
+          I accept the{" "}
+          <a href="/" style={{ color: "white" }}>
+            Privacy Policy
+          </a>
+          .
+        </span>
+        <br />
+        <StyledButton type="submit" value="Register">
+          Register
+        </StyledButton>
+        <p style={{ fontSize: "1rem" }}>
+          Already have an account?{" "}
+          <a href="/" style={{ color: "white" }}>
+            Login.
+          </a>
+        </p>
+      </form>
     </div>
   );
 }
