@@ -43,8 +43,11 @@ function App() {
       return (errors.password = "Password must be min 8 characters!");
     } else if (values.password.search(/\d/) === -1) {
       return (errors.password = "Password must contain number!");
-    } else if (values.password.search(/[a-zA-Z]/) === -1) {
-      return (errors.password = "Password must contain letter!");
+    } else if (values.password.search(/[A-Z]/) === -1) {
+      return (errors.password =
+        "Password must contain capital and lowercase letter!");
+    } else if (values.password.search(/[a-z]/) === -1) {
+      return (errors.password = "Password must contain lowercase letter!");
     } else if (values.password.search(/[^a-zA-Z0-9!@#$%^&*()_+]/) === -1) {
       return (errors.password = "Password must contain special character!");
     } else if (!values.confirmPassword) {
