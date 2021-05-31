@@ -1,6 +1,7 @@
 import "../App.css";
 import { useState } from "react";
 import { StyledInput, StyledButton, StyledPar } from "./Form.style";
+import { registerValidation } from "../utils/registerValidation";
 
 function App() {
   const [values, setValues] = useState({
@@ -16,55 +17,11 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    validate();
-    // if (validate()) {
-    // alert(JSON.stringify(validate()));
-    // console.log(values);
-    // }
-  };
-
-  const validate = () => {
-    if (!values.firstName) {
-      return setErrorText({ firstName: "Fill the First Name" });
+    setErrorText(registerValidation(values));
+    if (!registerValidation(values)) {
+      console.log(values);
+      alert("Registered Succesfully!");
     }
-    if (!values.lastName) {
-      return setErrorText({ lastName: "Fill the Last Name" });
-    }
-    if (!values.email) {
-      return setErrorText({ email: "Fill the Email Address" });
-    } else if (
-      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-    ) {
-      return setErrorText({ email: "Invalid Email Address" });
-    }
-    if (!values.password) {
-      return setErrorText({ password: "Enter Your Password" });
-    } else if (values.password.length < 8) {
-      return setErrorText({ password: "Password must be min 8 characters!" });
-    } else if (values.password.search(/\d/) === -1) {
-      return setErrorText({ password: "Password must contain number!" });
-    } else if (values.password.search(/[A-Z]/) === -1) {
-      return setErrorText({
-        password: "Password must contain capital and lowercase letter!",
-      });
-    } else if (values.password.search(/[a-z]/) === -1) {
-      return setErrorText({
-        password: "Password must contain lowercase letter!",
-      });
-    } else if (values.password.search(/[^a-zA-Z0-9!@#$%^&*()_+]/) === -1) {
-      return setErrorText({
-        password: "Password must contain special character!",
-      });
-    } else if (!values.confirmPassword) {
-      return setErrorText({ confirmPassword: "Confirm Password" });
-    } else if (!(values.password === values.confirmPassword)) {
-      return setErrorText({ confirmPassword: "Didn't Match Password" });
-    }
-    if (!values.policy) {
-      return setErrorText({ policy: "You should accept Privacy Policy!" });
-    }
-    alert("Registered Succesfully");
-    return setErrorText("");
   };
 
   return (
