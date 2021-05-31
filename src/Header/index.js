@@ -1,5 +1,5 @@
 import React from "react";
-import { StyledImg } from "./Header.style";
+import { StyledImg, HeaderStyle } from "./Header.style";
 
 const Logo = () => {
   return (
@@ -8,7 +8,7 @@ const Logo = () => {
         src="https://secure.meetupstatic.com/photos/event/3/1/b/9/600_488352729.jpeg"
         alt="Logo"
       />
-      <h1>Welcome to Clarusway</h1>
+      <HeaderStyle>Welcome to Clarusway</HeaderStyle>
     </div>
   );
 };

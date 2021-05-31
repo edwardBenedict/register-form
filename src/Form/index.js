@@ -1,6 +1,6 @@
 import "../App.css";
 import { useState } from "react";
-import { StyledInput, StyledButton } from "./Form.style";
+import { StyledInput, StyledButton, StyledPar } from "./Form.style";
 
 function App() {
   const [values, setValues] = useState({
@@ -11,54 +11,60 @@ function App() {
     confirmPassword: "",
     policy: false,
   });
+
+  const [errorText, setErrorText] = useState();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     validate();
-    if (validate()) {
-      alert(JSON.stringify(validate()));
-      // console.log(values);
-    }
+    // if (validate()) {
+    // alert(JSON.stringify(validate()));
+    // console.log(values);
+    // }
   };
 
   const validate = () => {
-    const errors = {};
-
     if (!values.firstName) {
-      return (errors.firstName = "Fill the First Name");
+      return setErrorText({ firstName: "Fill the First Name" });
     }
     if (!values.lastName) {
-      return (errors.lastName = "Fill the Last Name");
+      return setErrorText({ lastName: "Fill the Last Name" });
     }
-
     if (!values.email) {
-      return (errors.email = "Fill the Email Address");
+      return setErrorText({ email: "Fill the Email Address" });
     } else if (
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
     ) {
-      return (errors.email = "Invalid Email Address");
+      return setErrorText({ email: "Invalid Email Address" });
     }
     if (!values.password) {
-      return (errors.password = "Enter Your Password");
+      return setErrorText({ password: "Enter Your Password" });
     } else if (values.password.length < 8) {
-      return (errors.password = "Password must be min 8 characters!");
+      return setErrorText({ password: "Password must be min 8 characters!" });
     } else if (values.password.search(/\d/) === -1) {
-      return (errors.password = "Password must contain number!");
+      return setErrorText({ password: "Password must contain number!" });
     } else if (values.password.search(/[A-Z]/) === -1) {
-      return (errors.password =
-        "Password must contain capital and lowercase letter!");
+      return setErrorText({
+        password: "Password must contain capital and lowercase letter!",
+      });
     } else if (values.password.search(/[a-z]/) === -1) {
-      return (errors.password = "Password must contain lowercase letter!");
+      return setErrorText({
+        password: "Password must contain lowercase letter!",
+      });
     } else if (values.password.search(/[^a-zA-Z0-9!@#$%^&*()_+]/) === -1) {
-      return (errors.password = "Password must contain special character!");
+      return setErrorText({
+        password: "Password must contain special character!",
+      });
     } else if (!values.confirmPassword) {
-      return (errors.password = "Confirm Password");
+      return setErrorText({ confirmPassword: "Confirm Password" });
     } else if (!(values.password === values.confirmPassword)) {
-      return (errors.password = "Didn't Match Password");
+      return setErrorText({ confirmPassword: "Didn't Match Password" });
     }
     if (!values.policy) {
-      return (errors.policy = "You should accept Privacy Policy!");
+      return setErrorText({ policy: "You should accept Privacy Policy!" });
     }
-    return "Resgistered Succesfully!";
+    alert("Registered Succesfully");
+    return setErrorText("");
   };
 
   return (
@@ -71,7 +77,7 @@ function App() {
           value={values.firstName}
           placeholder="First Name"
         />
-        <br />
+        <StyledPar> {errorText?.firstName}</StyledPar>
         <StyledInput
           type="text"
           name="lastName"
@@ -79,7 +85,7 @@ function App() {
           value={values.lastName}
           placeholder="Last Name"
         />
-        <br />
+        <StyledPar> {errorText?.lastName}</StyledPar>
         <StyledInput
           type="email"
           name="email"
@@ -87,7 +93,7 @@ function App() {
           value={values.email}
           placeholder="Email Address"
         />
-        <br />
+        <StyledPar> {errorText?.email}</StyledPar>
         <StyledInput
           type="password"
           name="password"
@@ -95,7 +101,7 @@ function App() {
           value={values.password}
           placeholder="Password"
         />
-        <br />
+        <StyledPar> {errorText?.password}</StyledPar>
         <StyledInput
           type="password"
           name="confirmPassword"
@@ -105,7 +111,7 @@ function App() {
           value={values.confirmPassword}
           placeholder="Confirm Password"
         />
-        <br />
+        <StyledPar> {errorText?.confirmPassword}</StyledPar>
         <input
           type="checkbox"
           name="policy"
@@ -120,7 +126,7 @@ function App() {
           </a>
           .
         </span>
-        <br />
+        <StyledPar> {errorText?.policy}</StyledPar>
         <StyledButton type="submit" value="Register">
           Register
         </StyledButton>
