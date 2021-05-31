@@ -20,12 +20,18 @@ function App() {
     setErrorText(registerValidation(values));
     if (!registerValidation(values)) {
       console.log(values);
-      alert("Registered Succesfully!");
     }
   };
 
   return (
     <div>
+      <p>
+        {errorText === "" &&
+          values.firstName.toUpperCase() +
+            " " +
+            values.lastName.toUpperCase() +
+            " Registered Succesfully!"}
+      </p>
       <form onSubmit={handleSubmit}>
         <StyledInput
           type="text"
