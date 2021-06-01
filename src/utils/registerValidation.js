@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 export const registerValidation = (values) => {
   if (!values.firstName) {
     return { firstName: "Fill the First Name" };
